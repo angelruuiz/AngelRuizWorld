@@ -2,7 +2,6 @@
 <html lang="es" class="scroll-smooth">
 <head>
 
-<!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-0BVXMFM3MR"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
@@ -197,6 +196,44 @@
             }
         }
 
+        /* ---------------------------------- */
+        /* Estilos para el Video de Fondo (Background Video) */
+        /* ---------------------------------- */
+        
+        /* 1. Contenedor a pantalla completa */
+        .video-background {
+            position: absolute; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0; 
+            overflow: hidden;
+            
+            /* Opcional: Filtro oscuro sobre el video (ayuda a la lectura del texto dorado) */
+            background-color: rgba(0, 0, 0, 0.4); 
+        }
+
+        /* 2. El video en sí, para que siempre cubra el 100% */
+        .video-background video {
+            object-fit: cover; 
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            
+            /* Centrado perfecto del video dentro del contenedor Y ESCALA DE ZOOM */
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(1.1); /* <--- AUMENTO DE ESCALA AL 110% */
+
+            /* APLICAMOS LOS FILTROS DIRECTAMENTE AL VIDEO (opcional)
+               Para mantener un estilo coherente con tu imagen anterior.
+            */
+            filter: brightness(0.6) grayscale(70%); 
+        }
+
     </style>
 </head>
 
@@ -205,11 +242,9 @@
 <body class="antialiased">
 
     
-<!-- NAVEGACIÓN FIJA -->
 <header id="navbar" class="fixed top-0 left-0 right-0 z-50 bg-black/90 shadow-2xl backdrop-blur-sm transition-all duration-300">
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
             
-            <!-- Logo y Nombre -->
             <a href="#hero" class="flex items-center space-x-2">
                 <img src="images/logo-pequeño.jpg" 
                      alt="Logo Pequeño AR" 
@@ -217,7 +252,6 @@
                 <span class="cinzel text-xl font-extrabold text-white hidden sm:block">ANGEL RUIZ</span>
             </a>
             
-            <!-- Enlaces -->
             <div class="space-x-8 text-sm font-semibold">
                 <a href="#biografia" class="text-gray-300 hover:accent-gold transition duration-200 hover:text-yellow-400">Biografía</a>
                 <a href="#servicios" class="text-gray-300 hover:accent-gold transition duration-200 hover:text-yellow-400">Servicios</a>
@@ -227,44 +261,34 @@
     </header>
 
     
-<!-- SECCIÓN HERO/PRINCIPAL -->
 <section id="hero" class="hero-professional">
         
-        <!-- Fondo Fijo con Filtros -->
-        <div class="absolute inset-0 bg-cover bg-center bg-fixed" 
-             style="background-image: url('uploaded:estudio 5.jpg-b3903bbc-45b9-4153-ad82-e4b1c0adf274'); 
-                    /* Filtros: Más brillo (0.15) para mejorar la visibilidad del texto */
-                    filter: brightness(0.15) blur(3px) grayscale(100%); 
-                    background-position: left center; 
-                    z-index: 0;">
+        <div class="video-background">
+            <video autoplay loop muted playsinline poster="uploaded:estudio 5.jpg-b3903bbc-45b9-4153-ad82-e4b1c0adf274">
+                <source src="spring.mp4" type="video/mp4">
+                Tu navegador no soporta el video de fondo.
+            </video>
         </div>
         
-        <!-- Contenido Central -->
         <div class="relative z-10 p-8 max-w-7xl w-full">
             
-            <!-- SE AÑADE pt-16 (padding top 4rem) PARA EMPUJAR EL CONTENIDO HACIA ABAJO -->
             <div class="text-center w-full max-w-lg mx-auto flex flex-col items-center pt-16"> 
             
-                <!-- Subtítulo -->
                 <p class="text-2xl sm:text-4xl cinzel font-bold tracking-widest uppercase mb-2 accent-gold"> 
                     MAGIA & <span class="text-white">ILUSIONISMO</span>
                 </p>
 
-                <!-- Título Principal con Efecto Shimmer -->
                 <h1 class="cinzel text-6xl sm:text-7xl md:text-8xl font-bold text-white mb-6 tracking-widest text-shimmer"> 
                     ANGEL RUIZ
                 </h1>
                 
-                <!-- Frase -->
                 <p class="mt-4 text-2xl sm:text-3xl cinzel text-gray-300 max-w-3xl mx-auto font-normal"> 
                     "LA MAGIA ES EL ENGAÑO MÁS HONESTO."
                 </p>
                 
                 
-                <!-- Contenedor para los botones con espacio entre ellos -->
                 <div class="mt-12 flex flex-col space-y-3 items-center"> 
                     
-                    <!-- Botón Principal: Dorado y Grande -->
                     <a href="#contacto" 
                               class="inline-block px-12 py-4 rounded-full text-lg font-bold text-gray-900 shadow-2xl transition duration-300 transform hover:scale-105"
                              style="background-color: var(--color-primary);"
@@ -273,7 +297,6 @@
                     Reservar tu espectáculo
                     </a>
                     
-                    <!-- Botón Secundario: Gris/Claro y ligeramente más pequeño -->
                     <a href="#servicios" class="inline-block px-10 py-3 rounded-full text-base font-semibold border border-gray-400 text-gray-200 bg-gray-700/50 hover:bg-gray-700 transition duration-300 transform hover:scale-105">
                         Ver mis Servicios
                     </a>
@@ -283,11 +306,9 @@
     </section>
     
     
-<!-- SECCIÓN BIOGRAFÍA -->
 <section id="biografia" class="py-16 md:py-24 bg-gray-900 overflow-hidden"> 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Título -->
             <h2 class="text-center text-3xl md:text-5xl cinzel mb-2 hidden-content" data-animate> 
                 BIOGRAFÍA
             </h2>
@@ -295,14 +316,12 @@
 
             <div class="mt-8 grid md:grid-cols-2 gap-8 items-center"> 
                 
-                <!-- Texto -->
                 <div class="space-y-4 text-lg text-gray-300 leading-relaxed hidden-content" data-animate> 
                     <p>A mis 8 años, inquieto e interesado por todo aquello que no pudiera explicar, fue cuando se cruzó en mi camino la magia, de la mano del primer mago que presencié, Paco G. El cual me acabó introduciendo en todo este mundo de ilusión y asombro.</p>
                     <p>Tras muchos años de lecciones autodidactas y experimentar métodos propios, decidí dar el salto a escena y realizar lo que más me gusta: **Magia de Cerca (Close-up)**. Una de las más fuertes que existen en mi opinión, y en la que el público participa y se vive todo en primera persona.</p>
                     <p class="accent-gold font-semibold">Magia a escasos centímetros del espectador, en la que se llega a límites insospechados.</p>
                 </div>
 
-                <!-- Imagen -->
                 <div class="relative flex justify-center hidden-content" data-animate>
                     <img src="images/foto-bio.jpg" 
                          alt="Foto Profesional del Mago Ángel Ruiz en acción" 
@@ -313,11 +332,9 @@
     </section>
 
     
-<!-- SECCIÓN SERVICIOS -->
 <section id="servicios" class="py-16 md:py-24 bg-gray-800 overflow-hidden"> 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Títulos -->
             <h2 class="text-center text-3xl md:text-5xl cinzel mb-2 text-white hidden-content" data-animate> 
                 MIS <span class="accent-gold">SERVICIOS</span>
             </h2>
@@ -327,7 +344,6 @@
 
             <div class="grid md:grid-cols-3 gap-8"> 
 
-                <!-- TARJETA 1: EMPRESA -->
                 <div class="service-card p-6 rounded-xl hidden-content" data-animate> 
                     <h3 class="text-xl font-bold accent-gold cinzel mb-3">EVENTOS DE EMPRESA</h3> 
                     <p class="text-gray-300 mb-4 text-sm">La variedad de eventos de empresa que se pueden encontrar es muy amplia, presentaciones, aniversarios y conmemoraciones, eventos de fidelización, ferias y exposiciones, cenas de gala etc.. y por experiencia sabemos que la magia tiene cabida en todas ellas.</p>
@@ -350,7 +366,6 @@
                     <p class="service-remate mt-4 text-base">¡No lo dudes! El ilusionismo dejará un sabor de boca a tus invitados que nunca olvidarán.</p> 
                 </div>
 
-                <!-- TARJETA 2: BODAS -->
                 <div class="service-card p-6 rounded-xl hidden-content" data-animate> 
                     <h3 class="text-xl font-bold accent-gold cinzel mb-3">BODAS</h3> 
                     <p class="text-gray-300 mb-4 text-sm">El día de la boda es vuestro momento más mágico, donde os acompañarán las personas más importantes y especiales en vuestras vidas.</p>
@@ -361,7 +376,6 @@
                     <p class="service-remate mt-4 text-base">La magia para bodas es el complemento perfecto para un día tan especial. ¡La sorpresa está garantizada!</p> 
                 </div>
 
-                <!-- TARJETA 3: BARES Y HOTELES -->
                 <div class="service-card p-6 rounded-xl hidden-content" data-animate> 
                     <h3 class="text-xl font-bold accent-gold cinzel mb-3">BARES Y HOTELES</h3> 
                     <p class="text-gray-300 mb-4 text-sm">La magia en restaurantes y hoteles es una muy buena herramienta para publicitar y aumentar los ingresos en el sector de la restauración.</p>
@@ -395,11 +409,9 @@
     </section>
 
     
-<!-- SECCIÓN TESTIMONIOS (CARRUSEL HORIZONTAL) -->
 <section id="testimonios" class="py-16 md:py-24 bg-gray-900 overflow-hidden border-t border-b border-yellow-400/20"> 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             
-            <!-- Títulos -->
             <h2 class="text-center text-3xl md:text-5xl cinzel mb-2 accent-gold hidden-content" data-animate> 
                 LA VOZ DE NUESTROS CLIENTES
             </h2>
@@ -407,20 +419,12 @@
                 La mejor prueba de un evento inolvidable.
             </p>
 
-            <!-- CONTENEDOR PRINCIPAL DEL CARRUSEL -->
             <div class="relative">
                 
-                <!-- CONTENEDOR DE TESTIMONIOS (Scrollable via JS) -->
-                <!-- Se elimina snap-x/snap-mandatory para un control total vía JS y asegurar el smooth scroll -->
                 <div id="testimonials-container" 
                      class="flex space-x-6 pb-4 overflow-x-scroll scroll-smooth p-2" 
                      style="-ms-overflow-style: none; scrollbar-width: none;"> 
                     
-                    <!-- --------------------------------------- -->
-                    <!-- TESTIMONIOS ORIGINALES (6 EN TOTAL) -->
-                    <!-- --------------------------------------- -->
-                    
-                    <!-- Testimonio 1 -->
                     <div class="testimonial-card p-6 rounded-xl"> 
                         <p class="text-lg italic text-gray-200 mb-4"> 
                             "Contratamos a Ángel para dirigir un taller de magia para nuestro campus y la experiencia superó todas las expectativas. Su capacidad para conectar con públicos de todas las edades, desde niños hasta adultos, es asombrosa. ¡La mejor actividad para fomentar la creatividad!"
@@ -428,7 +432,6 @@
                         <p class="text-yellow-400 font-semibold text-base">- Movistar Estudiantes</p> 
                     </div>
 
-                    <!-- Testimonio 2 -->
                     <div class="testimonial-card p-6 rounded-xl"> 
                         <p class="text-lg italic text-gray-200 mb-4"> 
                             "Contratamos a Ángel para nuestra boda y fue la clave para que el cóctel fuera espectacular. La magia de cerca que hace es de otro nivel, totalmente impactante. Todos nuestros invitados nos preguntaron dónde lo habíamos encontrado. ¡Un 10 en profesionalismo y talento!"
@@ -436,7 +439,6 @@
                         <p class="text-yellow-400 font-semibold text-base">- Sofía y David</p> 
                     </div>
                     
-                    <!-- Testimonio 3 -->
                     <div class="testimonial-card p-6 rounded-xl"> 
                         <p class="text-lg italic text-gray-200 mb-4"> 
                             "Ángel transformó la comunión de nuestro sobrino en algo verdaderamente excepcional. Su paso por las mesas fue elegante y divertido, manteniendo a todo el mundo hablando de la comunión por días. ¡Totalmente recomendable!"
@@ -444,7 +446,6 @@
                         <p class="text-yellow-400 font-semibold text-base">- Comunión de Marcos</p> 
                     </div>
                     
-                    <!-- Testimonio 4 -->
                     <div class="testimonial-card p-6 rounded-xl"> 
                         <p class="text-lg italic text-gray-200 mb-4"> 
                             "Ángel fue el que inauguró nuestra peña, ¡y lo hizo a lo grande! En serio, nos dejó a todos clavados en el asiento, con la boca abierta y sin poder pestañear. Fue uno de esos momentos donde sabes que tienes que ver más. ¡Es un crack, recomendadísimo al 100%! Estamos aquí haciendo palmas y deseando que vuelva rapidísimo. ¡Que regrese ya!"
@@ -452,7 +453,6 @@
                         <p class="text-yellow-400 font-semibold text-base">- Peña 'La Escombrera' (Torrelodones)</p> 
                     </div>
 
-                    <!-- NUEVO Testimonio 5 -->
                     <div class="testimonial-card p-6 rounded-xl"> 
                         <p class="text-lg italic text-gray-200 mb-4"> 
                             "Un espectáculo de magia de salón impecable para la fiesta de cumpleaños. La interacción con el público fue perfecta y la calidad de los efectos, impresionante. Ángel tiene un gran sentido del humor y sabe manejar el escenario a la perfección. ¡Un éxito total!"
@@ -461,24 +461,15 @@
                     </div>
                     
                     
-                    <!-- --------------------------------------- -->
-                    <!-- CLON DE TESTIMONIOS PARA EL EFECTO LOOP (Se llenará con JS) -->
-                    <!-- --------------------------------------- -->
-
-                </div>
+                    </div>
                 
-                <!-- FLECHAS DE NAVEGACIÓN (solo visibles en pantallas medianas y grandes) -->
-                <!-- Flecha Izquierda -->
                 <button id="prev-testimonial" 
                         class="absolute left-0 top-1/2 -translate-y-1/2 bg-black/70 p-3 rounded-full shadow-lg text-yellow-400 z-20 hidden md:block transition duration-300 hover:bg-black/90 opacity-0 pointer-events-none">
-                    <!-- SVG Flecha Izquierda -->
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
                 </button>
                 
-                <!-- Flecha Derecha -->
                 <button id="next-testimonial" 
                         class="absolute right-0 top-1/2 -translate-y-1/2 bg-black/70 p-3 rounded-full shadow-lg text-yellow-400 z-20 hidden md:block transition duration-300 hover:bg-black/90">
-                    <!-- SVG Flecha Derecha -->
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </button>
                 
@@ -490,11 +481,9 @@
     </section>
     
     
-<!-- FOOTER/CONTACTO -->
 <footer id="contacto" class="pt-16 pb-8 bg-gray-950 border-t border-yellow-400/30 overflow-hidden"> 
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
              
-            <!-- Títulos -->
             <h2 class="text-3xl md:text-5xl cinzel mb-2 accent-gold hidden-content" data-animate> 
                 ¿PREPARADO PARA LA ILUSIÓN?
             </h2>
@@ -503,17 +492,14 @@
             </p>
 
             
-            <!-- Logo y Botones de Contacto -->
             <div class="grid grid-cols-1 md:grid-cols-2 items-center justify-items-center gap-8 mb-12 hidden-content" data-animate> 
 
-                <!-- Logo: Centrado en móvil, alineado a la derecha en el primer MD-col -->
                 <div class="flex justify-center md:justify-end w-full">
                     <img src="images/logo-grande.jpg" 
                          alt="Logo Principal Ángel Ruiz: Reina de Corazones y Llave" 
                          class="max-w-xs md:max-w-sm h-auto rounded-full shadow-2xl border-4 border-yellow-400/50">
                 </div>
 
-                <!-- Botones: Apilados y centrados en móvil, apilados y alineados a la izquierda en el segundo MD-col -->
                 <div class="flex flex-col space-y-3 w-full justify-center items-center md:items-start"> 
                     
                     <a href="mailto:angellruuiz@gmail.com" class="px-8 py-3 rounded-full text-base font-medium bg-yellow-400 text-gray-900 shadow-xl hover:bg-yellow-500 transition duration-300 transform hover:scale-105 max-w-sm w-full sm:w-auto text-center">
@@ -528,10 +514,8 @@
             </div>
 
 
-            <!-- Enlaces de navegación y redes sociales -->
             <div class="mt-16 hidden-content grid grid-cols-1 md:grid-cols-3 gap-6 text-left border-t border-gray-700/50 pt-6" data-animate> 
                 
-                <!-- Columna 1: Descripción -->
                 <div class="space-y-3">
                     <img src="images/logo-pequeño.jpg" 
                          alt="Logo Pequeño AR" 
@@ -539,7 +523,6 @@
                     <p class="text-gray-400 text-sm">Ángel Ruiz | Ilusionismo Profesional. Creamos momentos que desafían la realidad y que tus invitados nunca olvidarán.</p>
                 </div>
 
-                <!-- Columna 2: Enlaces Rápidos -->
                 <div>
                     <h4 class="text-lg font-bold accent-gold mb-3 cinzel">ENLACES RÁPIDOS</h4> 
                     <ul class="space-y-1 text-gray-400"> 
@@ -549,18 +532,15 @@
                     </ul>
                 </div>
                 
-                <!-- Columna 3: Sígueme -->
                 <div>
                     <h4 class="text-lg font-bold accent-gold mb-3 cinzel">SÍGUEME</h4> 
                     <div class="space-y-2"> 
                          
-                        <!-- Instagram -->
                         <a href="https://www.instagram.com/angellruuiz" target="_blank" class="text-gray-200 hover:text-yellow-400 transition flex items-center space-x-3">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
                             <span class="text-lg">@angellruuiz (Instagram)</span>
                         </a>
                         
-                        <!-- TikTok -->
                         <a href="https://www.tiktok.com/@angellruuiz" target="_blank" class="text-gray-200 hover:text-yellow-400 transition flex items-center space-x-3">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M12.3 2.1c.3 0 .5.2.5.5v12.2c0 .3-.2.5-.5.5h-.7c-.3 0-.5-.2-.5-.5V9.4c0-.3.2-.5.5-.5h.7c-.3-1.6-1.5-2.8-3-3.2v-2c2.1.2 3.9 1.6 4.7 3.6V2.6c0-.3.2-.5.5-.5h.2c.3 0 .5.2.5.5v16.1c0 .3-.2.5-.5.5h-1.9c-.3 0-.5-.2-.5-.5V7.4c0-.3.2-.5.5-.5h.7c.3 0 .5.2.5.5v9.1c-1.1.2-2.1-.1-3.2-.8V7.9c1.4.3 2.5 1.1 3.2 2.3V2.6c0-.3.2-.5.5-.5z"/>
@@ -571,7 +551,6 @@
                 </div>
             </div>
 
-            <!-- Copyright -->
             <p class="mt-8 text-gray-500 text-sm border-t border-gray-800 pt-6">
                 © 2024 Ángel Ruiz Magia Profesional. Todos los derechos reservados.
             </p>
@@ -579,7 +558,6 @@
     </footer>
 
     
-<!-- SCRIPTS DE JAVASCRIPT -->
 <script>
         // Función para manejar las animaciones de scroll
         const setupScrollAnimations = () => {
