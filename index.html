@@ -217,10 +217,9 @@
         /* 2. El video en sí, para que siempre cubra el 100% */
         .video-background video {
             object-fit: cover; 
-            min-width: 100%;
-            min-height: 100%;
-            width: auto;
-            height: auto;
+            /* FIX: Aseguramos que ocupe el espacio del contenedor */
+            width: 100%; 
+            height: 100%;
             
             /* Centrado perfecto del video dentro del contenedor Y ESCALA DE ZOOM */
             position: absolute;
@@ -228,9 +227,7 @@
             left: 50%;
             transform: translate(-50%, -50%) scale(1.1); /* <--- AUMENTO DE ESCALA AL 110% */
 
-            /* APLICAMOS LOS FILTROS DIRECTAMENTE AL VIDEO (opcional)
-               Para mantener un estilo coherente con tu imagen anterior.
-            */
+            /* APLICAMOS LOS FILTROS DIRECTAMENTE AL VIDEO (opcional) */
             filter: brightness(0.6) grayscale(70%); 
         }
 
@@ -265,6 +262,7 @@
         
         <div class="video-background">
             <video autoplay loop muted playsinline poster="uploaded:estudio 5.jpg-b3903bbc-45b9-4153-ad82-e4b1c0adf274">
+                <source src="spring.webm" type="video/webm">
                 <source src="spring.mp4" type="video/mp4">
                 Tu navegador no soporta el video de fondo.
             </video>
