@@ -343,10 +343,50 @@
         const Services = () => {
             const [selectedService, setSelectedService] = useState(null);
             const servicesData = [
-                { id: 1, title: "Bodas Mágicas", shortDesc: "Rompe el hielo y conecta a tus invitados durante el cóctel.", fullDesc: "El día de la boda es vuestro momento más mágico. La magia en bodas se suele hacer durante el cocktail, ideal para romper el hielo.", details: ["Magia itinerante grupo a grupo", "Duración: 1.5 - 2 horas (Cóctel)", "Efecto especial para los novios", "Recuerdo imposible para los invitados"], icon: Heart, bgClass: "from-pink-500/20 to-purple-500/20" },
-                { id: 2, title: "Particulares & VIP", shortDesc: "Desde cenas íntimas hasta grandes fiestas privadas.", fullDesc: "Un espectáculo diseñado para la distancia corta. Sin grandes cajas ni cortinas, solo habilidad pura.", details: ["Show de Salón o Close-up", "Duración: 1 - 1.5 hora", "Participación activa", "Magia con cartas y mentalismo", "Adaptable a cualquier espacio"], icon: Users, bgClass: "from-amber-500/20 to-orange-500/20" },
-                { id: 3, title: "Hoteles & Empresas", shortDesc: "Eleva la experiencia de tu marca o local corporativo.", fullDesc: "La magia es una herramienta de comunicación potente. Refuerza el mensaje de tu marca.", details: ["Cenas de empresa", "Dinamización de eventos", "Duración 1.5 - 2 horas"], icon: GlassWater, bgClass: "from-blue-500/20 to-indigo-500/20" }
-            ];
+    { 
+        id: 1, 
+        title: "Bodas Mágicas", 
+        shortDesc: "Rompe el hielo y conecta a tus invitados durante el cóctel.", 
+        fullDesc: "Vuestro gran día merece un toque de distinción que lo haga verdaderamente inolvidable. La magia durante el cóctel actúa como el nexo perfecto entre vuestros invitados, creando una atmósfera de asombro que rompe el hielo al instante. Familias y amigos compartirán una experiencia imposible desde el primer minuto.", // Texto ampliado
+        details: [
+            "Magia itinerante grupo a grupo", 
+            "Duración ideal: Cóctel (1.5 - 2h)", 
+            "Efecto especial personalizado para los novios", 
+            "Recuerdo imposible para los invitados"
+        ], 
+        icon: Heart, 
+        bgClass: "from-pink-500/20 to-purple-500/20" 
+    },
+    { 
+        id: 2, 
+        title: "Particulares & VIP", 
+        shortDesc: "Desde cenas íntimas hasta grandes fiestas privadas.", 
+        fullDesc: "Vive la magia en su estado más puro y exclusivo. Olvida los escenarios lejanos; aquí el milagro sucede justo delante de tus ojos e incluso en tus propias manos. Un espectáculo diseñado para la distancia corta, sin grandes cajas ni cortinas, solo habilidad pura e interacción constante para sorprender a los invitados más exigentes.", // Texto ampliado
+        details: [
+            "Show de Salón o Close-up (Magia de cerca)", 
+            "Duración flexible: 1 - 1.5 horas", 
+            "Participación activa de todos los asistentes", 
+            "Mentalismo y magia de alto impacto", 
+            "Adaptable a salón, jardín o reservado"
+        ], 
+        icon: Users, 
+        bgClass: "from-amber-500/20 to-orange-500/20" 
+    },
+    { 
+        id: 3, 
+        title: "Hoteles & Empresas", 
+        shortDesc: "Eleva la experiencia de tu marca o local corporativo.", 
+        fullDesc: "La magia es una herramienta de comunicación potente capaz de reforzar el mensaje de tu marca y hacer que tu evento destaque. Ya sea para dinamizar una cena de empresa, atraer atención en un stand o crear un ambiente relajado para el networking, diseñamos ilusiones que conectan con tu audiencia y dejan huella.", // Texto ampliado
+        details: [
+            "Dinamización de Cenas de Empresa", 
+            "Magia promocional para marcas", 
+            "Duración adaptable al formato del evento",
+            "Refuerzo de valores corporativos"
+        ], 
+        icon: GlassWater, 
+        bgClass: "from-blue-500/20 to-indigo-500/20" 
+    }
+];
             return (
                 <section id="services" className="py-20 relative z-10 px-4 max-w-7xl mx-auto">
                     <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }} className="text-center mb-12">
