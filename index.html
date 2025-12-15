@@ -162,6 +162,10 @@
                 const form = e.target;
                 const data = new FormData(form);
 
+                // +++ AÑADE ESTA LÍNEA AQUÍ +++
+                // Esto crea un asunto automático con el Nombre, Tipo y Fecha
+                data.append("_subject", `Reserva: ${data.get('eventType')} - ${data.get('name')} (${data.get('date')})`);
+
                 try {
                     const response = await fetch(FORMSPREE_ENDPOINT, {
                         method: 'POST',
