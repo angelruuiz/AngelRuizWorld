@@ -148,48 +148,51 @@
             }, [messages]);
 
             const sendMessage = async () => {
-                if (!input.trim() || isLoading) return;
+    if (!input.trim() || isLoading) return;
 
-                const userMsg = input;
-                setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-                setInput('');
-                setIsLoading(true);
+    const userMsg = input;
+    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
+    setInput('');
+    setIsLoading(true);
 
-                // --- CONFIGURACIÓN DE API CORREGIDA ---
-                const API_KEY = "AIzaSyD0JmT0UUGRgGs182HsPPIlqAfDxAATZTU"; 
-                // Usamos concatenación simple para asegurar que el signo "?" se lea bien
-                const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
+    // 1. LA CLAVE
+    const API_KEY = "AIzaSyD0JmT0UUGRgGs182HsPPIlqAfDxAATZTU"; 
+    
+    // 2. LA URL (Asegúrate de que NO tenga espacios al final)
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
 
-                try {
-                    const response = await fetch(url, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({
-                            contents: [{
-                                parts: [{ text: `Actúa como el Asistente Ejecutivo Virtual de un ilusionista profesional. Su propósito es informar sobre los servicios de magia, resolver dudas y dirigir al cliente hacia la reserva de fechas. Personalidad: Corporativo, sofisticado, serio y experto. Trato de "Usted". Pregunta: ${userMsg}` }]
-                            }]
-                        })
-                    });
+    try {
+        const response = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{
+                    parts: [{ text: `Actúa como el Asistente de Ángel Ruiz. Responde brevemente: ${userMsg}` }]
+                }]
+            })
+        });
 
-                    if (!response.ok) throw new Error('Respuesta no válida');
+        // Si Google responde mal, lanzamos el error para verlo en consola
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error("Detalle del error de Google:", errorData);
+            throw new Error('Respuesta no válida');
+        }
 
-                    const data = await response.json();
-                    
-                    // Verificamos que la respuesta contenga el texto antes de intentar leerlo
-                    if (data.candidates && data.candidates[0].content.parts[0].text) {
-                        const aiText = data.candidates[0].content.parts[0].text;
-                        setMessages(prev => [...prev, { role: 'assistant', text: aiText }]);
-                    } else {
-                        throw new Error('Formato de datos erróneo');
-                    }
+        const data = await response.json();
+        
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+            const aiText = data.candidates[0].content.parts[0].text;
+            setMessages(prev => [...prev, { role: 'assistant', text: aiText }]);
+        }
 
-                } catch (e) {
-                    console.error("Error en el chat:", e);
-                    setMessages(prev => [...prev, { role: 'assistant', text: 'Vaya, mi bola de cristal tiene interferencias. Inténtalo de nuevo.' }]);
-                } finally {
-                    setIsLoading(false);
-                }
-            };
+    } catch (e) {
+        console.error("Error en el chat:", e);
+        setMessages(prev => [...prev, { role: 'assistant', text: 'Vaya, mi bola de cristal tiene interferencias. Inténtalo de nuevo.' }]);
+    } finally {
+        setIsLoading(false);
+    }
+};
 
             return (
                 <div className="fixed bottom-6 right-6 z-[100] font-['Inter']">
