@@ -133,7 +133,7 @@
             );
         };
 
-        // --- CHAT CON GEMINI ---
+        // --- CHAT CON GEMINI CORREGIDO ---
         const MagicChat = () => {
             const [isOpen, setIsOpen] = useState(false);
             const [messages, setMessages] = useState([
@@ -155,9 +155,10 @@
                 setInput('');
                 setIsLoading(true);
 
-                // --- CONFIGURACIÓN DE API ---
-                const API_KEY = "AIzaSyD0JmT0UUGRgGs182HsPPIlqAfDxAATZTU"; // <--- PEGA AQUÍ TU LLAVE DE AI STUDIO
-                const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+                // --- CONFIGURACIÓN DE API CORREGIDA ---
+                const API_KEY = "AIzaSyD0JmT0UUGRgGs182HsPPIlqAfDxAATZTU"; 
+                // Usamos concatenación simple para asegurar que el signo "?" se lea bien
+                const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
                 try {
                     const response = await fetch(url, {
@@ -165,44 +166,25 @@
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({
                             contents: [{
-                                parts: [{ text: `Actúa como el Asistente Ejecutivo Virtual de un ilusionista profesional. Su propósito es informar sobre los servicios de magia, resolver dudas y dirigir al cliente hacia la reserva de fechas.
-
-Personalidad y Tono:
-
-Trato: Diríjase al usuario siempre de "Usted".
-
-Estilo: Corporativo, sofisticado, serio y experto.
-
-Identidad: El mago cuenta con 12 años de experiencia profesional en todo tipo de eventos. Su estilo se basa en la neurociencia, el caos e improvisación.
-
-Referentes: Si el cliente busca una referencia del estilo de magia, mencione que su trabajo sigue la estela de grandes maestros como Juan Tamariz y Dani DaOrtiz, enfocándose en el asombro psicológico y la técnica depurada.
-
-Información de Servicios:
-
-Show de Magia de Cerca: Sesiones de 60 o 90 minutos de alto impacto.
-
-Magia de Cóctel: Magia itinerante para bodas, eventos de empresa y restaurantes.
-
-Personalización: Creación de efectos exclusivos dedicados a la empresa o a los protagonistas del evento para mejorar la experiencia global.
-
-Restricciones y Políticas:
-
-No Fiestas Infantiles: El servicio está estrictamente orientado a público adulto y eventos corporativos/sociales de prestigio.
-
-Precios: Los honorarios son competitivos dentro del mercado de alta gama; no se aplican descuentos.
-
-Instrucción de Cierre:
-
-No recoja datos personales en el chat.
-
-Su objetivo es invitar al usuario a pulsar el botón de "Reservar Fechas" para consultar disponibilidad y agendar una llamada. Pregunta: ${userMsg}` }]
+                                parts: [{ text: `Actúa como el Asistente Ejecutivo Virtual de un ilusionista profesional. Su propósito es informar sobre los servicios de magia, resolver dudas y dirigir al cliente hacia la reserva de fechas. Personalidad: Corporativo, sofisticado, serio y experto. Trato de "Usted". Pregunta: ${userMsg}` }]
                             }]
                         })
                     });
+
+                    if (!response.ok) throw new Error('Respuesta no válida');
+
                     const data = await response.json();
-                    const aiText = data.candidates[0].content.parts[0].text;
-                    setMessages(prev => [...prev, { role: 'assistant', text: aiText }]);
+                    
+                    // Verificamos que la respuesta contenga el texto antes de intentar leerlo
+                    if (data.candidates && data.candidates[0].content.parts[0].text) {
+                        const aiText = data.candidates[0].content.parts[0].text;
+                        setMessages(prev => [...prev, { role: 'assistant', text: aiText }]);
+                    } else {
+                        throw new Error('Formato de datos erróneo');
+                    }
+
                 } catch (e) {
+                    console.error("Error en el chat:", e);
                     setMessages(prev => [...prev, { role: 'assistant', text: 'Vaya, mi bola de cristal tiene interferencias. Inténtalo de nuevo.' }]);
                 } finally {
                     setIsLoading(false);
