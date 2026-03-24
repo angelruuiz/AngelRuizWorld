@@ -147,52 +147,51 @@
                 if (scrollRef.current) scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
             }, [messages]);
 
-            const sendMessage = async () => {
-    if (!input.trim() || isLoading) return;
+           const sendMessage = async () => {
+                if (!input.trim() || isLoading) return;
 
-    const userMsg = input;
-    setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
-    setInput('');
-    setIsLoading(true);
+                const userMsg = input;
+                setMessages(prev => [...prev, { role: 'user', text: userMsg }]);
+                setInput('');
+                setIsLoading(true);
 
-    // 1. LA CLAVE
-    const API_KEY = "AIzaSyD0JmT0UUGRgGs182HsPPIlqAfDxAATZTU"; 
-    
-    // 2. LA URL (Asegúrate de que NO tenga espacios al final)
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${API_KEY}`;
+                // 1. LA CLAVE (Asegúrate de que no tenga espacios alrededor)
+                const API_KEY = "AIzaSyD0JmT0UUGRgGs182HsPPIlqAfDxAATZTU"; 
+                
+                // 2. LA URL CORREGIDA (Copia esta línea entera tal cual)
+                const url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + API_KEY;
 
-    try {
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                contents: [{
-                    parts: [{ text: `Actúa como el Asistente de Ángel Ruiz. Responde brevemente: ${userMsg}` }]
-                }]
-            })
-        });
+                try {
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{ text: "Actúa como el asistente de Ángel Ruiz (mago y programador). Responde brevemente: " + userMsg }]
+                            }]
+                        })
+                    });
 
-        // Si Google responde mal, lanzamos el error para verlo en consola
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error("Detalle del error de Google:", errorData);
-            throw new Error('Respuesta no válida');
-        }
+                    if (!response.ok) {
+                        const errorRes = await response.json();
+                        console.log("Error de Google:", errorRes);
+                        throw new Error('Respuesta no válida');
+                    }
 
-        const data = await response.json();
-        
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
-            const aiText = data.candidates[0].content.parts[0].text;
-            setMessages(prev => [...prev, { role: 'assistant', text: aiText }]);
-        }
+                    const data = await response.json();
+                    
+                    if (data.candidates && data.candidates[0].content.parts[0].text) {
+                        const aiText = data.candidates[0].content.parts[0].text;
+                        setMessages(prev => [...prev, { role: 'assistant', text: aiText }]);
+                    }
 
-    } catch (e) {
-        console.error("Error en el chat:", e);
-        setMessages(prev => [...prev, { role: 'assistant', text: 'Vaya, mi bola de cristal tiene interferencias. Inténtalo de nuevo.' }]);
-    } finally {
-        setIsLoading(false);
-    }
-};
+                } catch (e) {
+                    console.error("Error detallado:", e);
+                    setMessages(prev => [...prev, { role: 'assistant', text: 'Vaya, mi bola de cristal tiene interferencias. Inténtalo de nuevo.' }]);
+                } finally {
+                    setIsLoading(false);
+                }
+            };
 
             return (
                 <div className="fixed bottom-6 right-6 z-[100] font-['Inter']">
